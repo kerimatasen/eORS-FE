@@ -72,7 +72,7 @@ const Students = () => {
       key: "class",
     },
     {
-      title: "Action",
+      title: "İşlemler",
       key: "action",
       align: "center",
       render: (_, record) => (
@@ -125,6 +125,7 @@ const Students = () => {
         <AddStudentsDrawer
           studentsDrawer={studentsDrawer}
           setStudentsDrawer={setStudentsDrawer}
+          getStundts={getStundts}
         />
       )}
     </Card>

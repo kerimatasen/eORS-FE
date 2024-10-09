@@ -8,32 +8,34 @@ import {
 import { Button, Layout, theme, Dropdown, Avatar } from "antd";
 const { Header } = Layout;
 
+const items = [
+  {
+    key: "1",
+    label: "Hesabım",
+    disabled: true,
+  },
+  {
+    type: "divider",
+  },
+  {
+    key: "2",
+    label: "Profile",
+    extra: "⌘P",
+    icon: <UserOutlined />,
+  },
+  {
+    key: "4",
+    label: "Settings",
+    icon: <SettingOutlined />,
+    extra: "⌘S",
+  },
+];
+
 const MainHeader = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const items = [
-    {
-      key: "1",
-      label: "Hesabım",
-      disabled: true,
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "2",
-      label: "Profile",
-      extra: "⌘P",
-      icon: <UserOutlined />,
-    },
-    {
-      key: "4",
-      label: "Settings",
-      icon: <SettingOutlined />,
-      extra: "⌘S",
-    },
-  ];
+
   return (
     <Header
       style={{

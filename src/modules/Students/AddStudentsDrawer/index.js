@@ -54,21 +54,20 @@ const AddStudentsDrawer = (props) => {
         ...formValues,
       })
         .then((res) => {
-          if (res?.success) {
+          if (res) {
             setLoading(false);
             toastr.success(
               `${formValues.firstName} ${formValues.lastName} isimli öğrenci kaydedilmiştir.`
             );
             refForm.resetFields();
             onClose();
+            props.getStundts();
           } else {
-            console.log(res);
             setLoading(false);
             toastr.error(res?.Message);
           }
         })
         .catch(function (error) {
-          console.log(error);
           setLoading(false);
           toastr.error(error?.response?.data?.Message);
         });
