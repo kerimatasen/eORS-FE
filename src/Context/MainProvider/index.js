@@ -18,6 +18,7 @@ const appReducer = (state, action) => {
       return { ...state, userInfo: action.payload };
     case ACTIONS.SET_FILTER:
       return { ...state, filter: action.payload };
+
     default:
       return state;
   }
@@ -43,7 +44,13 @@ export const MainProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ state, setUserInfo, setFilter }}>
+    <AppContext.Provider
+      value={{
+        state,
+        setUserInfo,
+        setFilter,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

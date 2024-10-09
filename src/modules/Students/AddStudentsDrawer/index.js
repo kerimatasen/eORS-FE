@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Space, Button, Row, Col, Drawer, Form, Input, Spin } from "antd";
+import {
+  Space,
+  Button,
+  Row,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Spin,
+  Select,
+} from "antd";
 import * as Http from "../../../utils/http.helper";
+import cityDistrictData from "../../Data/cityDistrictData.json"; // data.json dosyasının doğru yolunu belirtin
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 
@@ -8,6 +19,7 @@ const { TextArea } = Input;
 const AddStudentsDrawer = (props) => {
   const [refForm] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [districtByCityIdData, setDistrictByCityIdData] = useState([]);
   useEffect(() => {
     // forma değer set etme
     if (props.studentsDrawer.data?.id) {
@@ -29,7 +41,7 @@ const AddStudentsDrawer = (props) => {
   const onClose = () => {
     // formu kapatma ve resetleme
     props.setStudentsDrawer({ show: false, data: null });
-    refForm.resetFields();
+    // refForm.resetFields(); bunun yerine destroyOnClose etiketi drawera eklendi.
   };
 
   const onSave = () => {
@@ -72,14 +84,11 @@ const AddStudentsDrawer = (props) => {
           ? `${props.studentsDrawer.data?.firstName} ${props.studentsDrawer.data?.lastName} Öğrencisini Güncelle`
           : "Öğrenci Ekle"
       }
-      width={720}
+      size={"large"}
       onClose={() => onClose()}
       open={props.studentsDrawer.show}
-      styles={{
-        body: {
-          paddingBottom: 80,
-        },
-      }}
+      maskClosable={false} //Box dışı tıklamada drawer kapanmasın diye eklendi.
+      destroyOnClose // Default true değeri alır buda formun ve drawerın yok edilmesi için eklendi. Kapatma işleminden sonra drawer yok edilir.
       extra={
         <Space>
           <Button onClick={() => onClose()}>Vazgeç</Button>
@@ -204,12 +213,39 @@ const AddStudentsDrawer = (props) => {
 
             <Col span={12}>
               <Form.Item name="city" label="Şehir">
-                <Input />
+                <Select
+                  options={cityDistrictData}
+                  onChange={(e, data) => {
+                    refForm.resetFields(["district"]);
+                    setDistrictByCityIdData(
+                      data?.district.map((item) => {
+                        return { value: item, label: item };
+                      })
+                    );
+                  }}
+                  showSearch
+                  optionFilterProp="label"
+                  filterSort={(optionA, optionB) =>
+                    (optionA?.label ?? "")
+                      .toLowerCase()
+                      .localeCompare((optionB?.label ?? "").toLowerCase())
+                  }
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="district" label="İlçe">
-                <Input />
+                <Select
+                  options={districtByCityIdData}
+                  showSearch
+                  disabled={districtByCityIdData.length === 0}
+                  optionFilterProp="label"
+                  filterSort={(optionA, optionB) =>
+                    (optionA?.label ?? "")
+                      .toLowerCase()
+                      .localeCompare((optionB?.label ?? "").toLowerCase())
+                  }
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
