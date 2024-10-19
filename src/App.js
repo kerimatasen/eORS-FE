@@ -1,9 +1,11 @@
 import React from "react";
-import { MainLayout } from "./Components";
-import { MainProvider } from "./Context/MainProvider";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import { Students, Teachers, Dashboard } from "./modules"; // Import from modules
+import { LoginPage, MainLayout } from "./Components";
 
 toastr.options = {
   positionClass: "toast-top-right", // Change this to your desired position
@@ -26,9 +28,15 @@ toastr.options = {
 };
 function App() {
   return (
-    <MainProvider>
-      <MainLayout />
-    </MainProvider>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<MainLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/student-management" element={<Students />} />
+        <Route path="/teacher-management" element={<Teachers />} />
+      </Route>
+    </Routes>
   );
 }
 

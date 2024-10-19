@@ -1,37 +1,44 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Layout, theme } from "antd";
+import React, { useState, useEffect } from "react";
+import { Layout, Spin, theme } from "antd";
 import Sidebar from "../Sidebar";
 import MainHeader from "../Header";
-import MainRouter from "../Router";
+import { useAppContext } from "../../Context";
+import { Outlet } from "react-router-dom"; // Outlet'i içe aktarın
+
 const { Content } = Layout;
 
 const MainLayout = () => {
+  const { state, setLoading } = useAppContext();
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  return (
-    <Router basename="/">
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sidebar collapsed={collapsed} />
-        <Layout>
-          <MainHeader collapsed={collapsed} setCollapsed={setCollapsed} />
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
 
-          <Content
-            style={{
-              margin: 16,
-              padding: 0,
-              minHeight: 280,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <MainRouter />
-          </Content>
-        </Layout>
+  return (
+    <Layout style={{ minHeight: "100vh" }}>
+      <Spin spinning={state?.loading} fullscreen tip="Loading..." />
+      <Sidebar collapsed={collapsed} />
+      <Layout>
+        <MainHeader collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Content
+          style={{
+            margin: 16,
+            padding: 0,
+            minHeight: 280,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          <Outlet />
+        </Content>
       </Layout>
-    </Router>
+    </Layout>
   );
 };
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import * as Http from "../../utils/http.helper";
-import { Spin, Table, Space, Card, Button, Tooltip, Popconfirm } from "antd";
+import { Table, Space, Card, Button, Tooltip, Popconfirm } from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import AddStudentsDrawer from "./AddStudentsDrawer";
 import "toastr/build/toastr.min.css";
+import { useAppContext } from "../../Context";
+
 const Students = () => {
-  const [loading, setLoading] = useState(true);
+  const { setLoading } = useAppContext();
+
   const [studentList, setStudentList] = useState([]);
   const [studentsDrawer, setStudentsDrawer] = useState({
     show: false,
@@ -24,6 +27,7 @@ const Students = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getStundts();
   }, []);
 
@@ -119,7 +123,6 @@ const Students = () => {
         </Button>
       }
     >
-      <Spin spinning={loading} fullscreen tip="Loading..." />
       <Table columns={columns} dataSource={studentList} bordered />
       {studentsDrawer.show && (
         <AddStudentsDrawer
