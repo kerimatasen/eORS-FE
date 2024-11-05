@@ -1,0 +1,52 @@
+[
+  {
+    "id": 9,
+    "name": "Tolga",
+    "surName": "Özkan",
+    "email": "tolga.ozkan@gmail.com",
+    "password": "123",
+    "classCode": "1",
+    "schoolCode": "1",
+    "role": 2
+  },
+  {
+    "id": 10,
+    "name": "Kerim",
+    "surName": "Kerim",
+    "email": "kerim.atasen@gmail.com",
+    "password": "123",
+    "classCode": "2",
+    "schoolCode": "2",
+    "role": 2
+  },
+  {
+    "id": 3,
+    "name": "Tolga",
+    "surName": "Öğretmen",
+    "email": "tolga.ogrt@gmail.com",
+    "password": "123",
+    "classCode": "1",
+    "schoolCode": "1",
+    "role": 1
+  },
+  {
+    "id": 4,
+    "name": "Kerim",
+    "surName": "Öğretmen",
+    "email": "kerim.ogrt@gmail.com",
+    "password": "123",
+    "classCode": "2",
+    "schoolCode": "2",
+    "role": 1
+  },
+  {
+    "id": 5,
+    "name": "By",
+    "surName": "Admin",
+    "email": "by.admin@gmail.com",
+    "password": "123",
+    "classCode": "",
+    "schoolCode": "",
+    "role": 3
+  }
+]

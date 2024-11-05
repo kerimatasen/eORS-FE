@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../Context";
+import usersData from "../../modules/Data/usersData.json"; // data.json dosyasının doğru yolunu belirtin
+import toastr from "toastr";
 
 const LoginPage = () => {
   const [refForm] = Form.useForm();
@@ -10,12 +12,15 @@ const LoginPage = () => {
 
   const onFinish = (values) => {
     setLoading(true);
-    const userInfo = {
-      email: values.email,
-      userName: values.email.split("@")[0],
-    }; // Örnek kullanıcı bilgisi
-    setUserInfo(userInfo); // Kullanıcı bilgilerini context'e kaydet
-    navigate("/dashboard"); // Başarıyla giriş yaptıktan sonra yönlendir
+    const findUser = usersData.find(
+      (user) => user.email === values.email && user.password === values.password
+    );
+    if (findUser && findUser?.id) {
+      setUserInfo(findUser); // Kullanıcı bilgilerini context'e kaydet
+      navigate("/dashboard"); // Başarıyla giriş yaptıktan sonra yönlendir
+    } else {
+      toastr.error("HATA MESAJI");
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
