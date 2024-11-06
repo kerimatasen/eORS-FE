@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Students, Teachers, Dashboard, Appointments } from "./modules"; // Import from modules
 import { LoginPage, MainLayout } from "./Components";
+import MainPage from "./Components/MainPage";
 
 toastr.options = {
   positionClass: "toast-top-right", // Change this to your desired position
@@ -29,7 +30,8 @@ toastr.options = {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Navigate to="/main-page" />} />
+      <Route path="/main-page" element={<MainPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />

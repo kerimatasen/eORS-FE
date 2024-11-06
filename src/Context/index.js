@@ -62,7 +62,7 @@ export const MainProvider = ({ children }) => {
       dispatch({ type: ACTIONS.LOGOUT });
       localStorage.removeItem("userInfo");
       localStorage.removeItem("expiryTime");
-      navigate("/login");
+      navigate("/");
     }
   }, []);
 

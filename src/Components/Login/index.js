@@ -28,36 +28,70 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: "100px auto" }}>
-      <h2>Login</h2>
-      <Form
-        name="loginForm"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        form={refForm}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        background: "linear-gradient(135deg, #1e90ff, #ffffff)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 400,
+          width: "100%",
+          padding: "40px",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
       >
-        <Form.Item
-          label="E-mail"
-          name="email"
-          rules={[{ required: true, message: "Please input your username!" }]}
+        <h2 style={{ textAlign: "center" }}>Login</h2>
+        <Form
+          name="loginForm"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          form={refForm}
+          layout="vertical"
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="E-mail"
+            name="email"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
-        >
-          <Input.Password />
-        </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Login
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "end",
+            }}
+          >
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={() => navigate("/main-page")}
+              style={{ marginRight: 15 }}
+            >
+              Go Back
+            </Button>
+            <Button type="primary" htmlType="submit">
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };

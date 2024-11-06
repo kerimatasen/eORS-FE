@@ -54,7 +54,7 @@ const MainHeader = (props) => {
     localStorage.removeItem("expiryTime");
 
     // Navigate to login page
-    navigate("/login");
+    navigate("/main-page");
   };
 
   return (
